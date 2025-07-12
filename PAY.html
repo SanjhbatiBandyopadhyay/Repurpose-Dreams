@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .payment-container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+
+    input[type="text"], input[type="email"], input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .payment-methods {
+      margin-top: 20px;
+    }
+
+    .upi-section {
+      display: none;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #4CAF50;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="payment-container">
+    <h2>Buy Product</h2>
+
+    <form id="paymentForm">
+      <label>Full Name</label>
+      <input type="text" name="name" required>
+
+      <label>Email</label>
+      <input type="email" name="email" required>
+
+      <label>Phone Number</label>
+      <input type="number" name="phone" required>
+
+      <label>Address</label>
+      <input type="text" name="address" required>
+      
+      <label>Describe Your Customisation</label>
+      <input type="text" name="Your Choice" required>
+
+
+
+      <div class="payment-methods">
+        <label>Payment Method:</label>
+        <input type="radio" name="payment" value="cod" checked onclick="toggleUPI(false)"> Cash on Delivery (COD)<br>
+        <input type="radio" name="payment" value="upi" onclick="toggleUPI(true)"> UPI Payment
+      </div>
+
+      <div class="upi-section" id="upiSection">
+        <label>Enter UPI ID</label>
+        <input type="text" name="upi_id" placeholder="example@upi">
+      </div>
+
+      <button type="submit" class="btn">Place Order</button>
+    </form>
+  </div>
+
+  <script>
+    function toggleUPI(show) {
+      document.getElementById('upiSection').style.display = show ? 'block' : 'none';
+    }
+
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Order Placed! (Note: This is a demo page.)");
+    });
+  </script>
+
+</body>
+</html>
