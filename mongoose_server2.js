@@ -6,7 +6,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ✅ MongoDB connection
+// ✅ MongoDB Atlas connection
 mongoose.connect(
   'mongodb+srv://xib48sanjhbatibandyopadhyay:Ahsas77ffuP-@cluster0.dgdtxbn.mongodb.net/formData?retryWrites=true&w=majority&appName=Cluster0',
   { useNewUrlParser: true, useUnifiedTopology: true }
@@ -16,7 +16,7 @@ mongoose.connect(
   console.error('❌ MongoDB connection error:', err);
 });
 
-// ✅ Define schema and model
+// ✅ Mongoose schema & model
 const submissionSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -30,16 +30,21 @@ const Submission = mongoose.model('Submission', submissionSchema);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ✅ Routes
+// ✅ Serve index.html
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// ✅ Handle form submission with debug logging
 app.post('/submit', async (req, res) => {
   try {
     const { name, email, message } = req.body;
+    console.log("📥 Form data received:", name, email, message);
+
     const newSubmission = new Submission({ name, email, message });
-    await newSubmission.save();
+    const result = await newSubmission.save();
+
+    console.log("✅ Document saved with ID:", result._id);
     res.send('<h2>Thank you! Your data has been submitted.</h2><a href="/">Go Back</a>');
   } catch (error) {
     console.error('❌ Error saving to MongoDB:', error);
