@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 // ✅ MongoDB Atlas connection
 mongoose.connect(
-  'mongodb+srv://xib48sanjhbatibandyopadhyay:Ahsas77ffuP-@cluster0.dgdtxbn.mongodb.net/formData?retryWrites=true&w=majority&appName=Cluster0',
+  'process.env.MONGO_URI',
   { useNewUrlParser: true, useUnifiedTopology: true }
 ).then(() => {
   console.log('✅ Connected to MongoDB Atlas');
